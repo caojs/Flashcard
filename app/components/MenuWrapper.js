@@ -1,4 +1,7 @@
-import React, {
+import _ from 'lodash';
+import React from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {
     Component,
     TouchableOpacity,
     StatusBar,
@@ -9,8 +12,8 @@ import React, {
     Dimensions,
     StyleSheet
 } from 'react-native';
-import _ from 'lodash';
-import Icon from 'react-native-vector-icons/Ionicons';
+
+import MiniViewer from './MiniViewer.js';
 
 var SIDE_NAV = '_SIDE_NAVE_';
 var PAGE = '_PAGE_';
@@ -225,9 +228,9 @@ export default class MenuWrapper extends Component {
                             <Animated.View
                                 key={index}
                                 style={[styles.animatedView, {transform: transform}]}>
-                                <TouchableOpacity style={styles.view} onPress={this._tapPage}>
-                                    <Text>{page}</Text>
-                                </TouchableOpacity>
+                                    <MiniViewer>
+                                        <Text>{page}</Text>
+                                    </MiniViewer>
                             </Animated.View>
                         )
                     })}
@@ -251,7 +254,7 @@ var styles = StyleSheet.create({
         position: 'relative',
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#f7f7f7'
+        backgroundColor: '#DA344D'
     },
     nav: {
         marginLeft: 35
@@ -262,27 +265,28 @@ var styles = StyleSheet.create({
     },
     animatedView: {
         position: 'absolute',
-        flex: 1,
-        justifyContent: 'center',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'white'
-    },
-    view: {
-        position: 'absolute',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        backgroundColor: 'white',
         shadowColor: 'black',
         shadowOpacity: 0.05,
         shadowRadius: 10,
         shadowOffset: { width: -5, height: 5}
+    },
+    view: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     inner: {
         position: 'absolute',
@@ -290,8 +294,8 @@ var styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         left: 0,
+        justifyContent: 'center',
         overflow: 'hidden',
-        justifyContent: 'center'
     },
     header: {
         position: 'absolute',
@@ -301,13 +305,11 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 65,
-        borderTopWidth: 20,
-        borderTopColor: '#DA344D',
         backgroundColor: '#DA344D'
     },
     headerMenu: {
         position: 'absolute',
-        top: 10,
+        top: 30,
         left: 10,
         width: 30,
         height: 25,
@@ -315,6 +317,7 @@ var styles = StyleSheet.create({
         overflow: 'hidden',
     },
     headerTitle: {
+        marginTop: 20,
         fontSize: 20,
         color: 'white'
     }

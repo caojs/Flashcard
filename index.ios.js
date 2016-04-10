@@ -10,6 +10,7 @@ import React, {
 from 'react-native';
 import App from './app/index.js';
 import MenuWrapper from './app/components/MenuWrapper.js';
+import MiniViewer from './app/components/MiniViewer.js';
 
 class Flashcard extends Component {
     render(): ReactElement {
