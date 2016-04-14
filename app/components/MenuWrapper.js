@@ -13,7 +13,7 @@ import {
     StyleSheet
 } from 'react-native';
 
-import MiniViewer from './MiniViewer.js';
+import CardViewer from './CardViewer.js';
 
 var SIDE_NAV = '_SIDE_NAVE_';
 var PAGE = '_PAGE_';
@@ -203,10 +203,18 @@ export default class MenuWrapper extends Component {
         } = this.state;
 
         return (
-            <View style={styles.container}>
+            <View style={styles.app}>
                 <StatusBar barStyle="light-content"/>
+                <View style={styles.header}>
+                    <TouchableOpacity
+                        style={styles.menu}
+                        onPress={this._toggle}>
+                        <Icon name="navicon" size={25} color="white"/>
+                    </TouchableOpacity>
+                    <Text style={styles.title}> Flashcard </Text>
+                </View>
                 <View style={styles.inner}>
-                    <View style={[styles.nav]}>
+                    <View style={[styles.navigation]}>
                         {[].slice.call(pages)
                             .reverse()
                             .map((page, index) => (
@@ -214,10 +222,9 @@ export default class MenuWrapper extends Component {
                                     style={styles.navItem}
                                     key={index}
                                     onPress={() => this._tapMenu(length - 1 - index)}>
-                                    <Text>{page}</Text>
+                                    <Text style={styles.navItemText}>{page}</Text>
                                 </TouchableOpacity>))}
                     </View>
-
                     {pages.map((page, index) => {
                         let state = animations[index];
                         let transform = [].concat(
@@ -228,86 +235,33 @@ export default class MenuWrapper extends Component {
                             <Animated.View
                                 key={index}
                                 style={[styles.animatedView, {transform: transform}]}>
-                                    <MiniViewer>
-                                        <Text>{page}</Text>
-                                    </MiniViewer>
+                                <CardViewer/>
                             </Animated.View>
                         )
                     })}
+
                 </View>
-                <View style={styles.header}>
-                    <TouchableOpacity
-                        style={styles.headerMenu}
-                        onPress={this._toggle}>
-                        <Icon name="navicon" size={25} color="white"/>
-                    </TouchableOpacity>
-                    <Text style={styles.headerTitle}> Flashcard </Text>
-                </View>
-                
             </View>
         )
     }
 }
 
 var styles = StyleSheet.create({
-    container: {
-        position: 'relative',
+    app: {
         flex: 1,
-        justifyContent: 'center',
+        flexDirection: 'column',
         backgroundColor: '#DA344D'
     },
-    nav: {
-        marginLeft: 35
-    },
-    navItem: {
-        paddingBottom: 15,
-        paddingTop: 15
-    },
-    animatedView: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        shadowColor: 'black',
-        shadowOpacity: 0.05,
-        shadowRadius: 10,
-        shadowOffset: { width: -5, height: 5}
-    },
-    view: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    inner: {
-        position: 'absolute',
-        top: 60,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        justifyContent: 'center',
-        overflow: 'hidden',
-    },
     header: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        left: 0,
+        position: 'relative',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: 20,
         height: 65,
         backgroundColor: '#DA344D'
     },
-    headerMenu: {
+    menu: {
         position: 'absolute',
         top: 30,
         left: 10,
@@ -316,9 +270,36 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         overflow: 'hidden',
     },
-    headerTitle: {
-        marginTop: 20,
+    title: {
+        textAlign: 'center',
         fontSize: 20,
         color: 'white'
+    },
+    inner: {
+        flex: 1,
+        position: 'relative',
+        justifyContent: 'center',
+        overflow: 'hidden',
+    },
+    navigation: {
+        marginLeft: 35
+    },
+    navItem: {
+        paddingBottom: 15,
+        paddingTop: 15
+    },
+    navItemText: {
+        color: '#f7f7f7'
+    },
+    animatedView: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        shadowColor: 'black',
+        shadowOpacity: 0.05,
+        shadowRadius: 10,
+        shadowOffset: { width: -5, height: 5}
     }
 });
