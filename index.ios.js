@@ -10,12 +10,13 @@ import React, {
 from 'react-native';
 import App from './app/index.js';
 import MenuWrapper from './app/components/MenuWrapper.js';
+import Menu2 from './app/components/MenuWrapper_.js'
 
 class Flashcard extends Component {
-    render(): ReactElement {
+    render() {
         return (
-                <MenuWrapper/>
-           )        
+                <Menu2/>
+           )
     }
 }
 

@@ -50,7 +50,7 @@ export default class MenuWrapper extends Component {
         return {
             ...Dimensions.get('window'),
             length: pages.length,
-            current: 3, 
+            current: 3,
             active: false,
             animations,
         }
@@ -199,17 +199,18 @@ export default class MenuWrapper extends Component {
     render () {
         var {
            length,
+           active,
            animations
         } = this.state;
 
         return (
             <View style={styles.app}>
-                <StatusBar barStyle="light-content"/>
+                <StatusBar barStyle="default"/>
                 <View style={styles.header}>
                     <TouchableOpacity
                         style={styles.menu}
                         onPress={this._toggle}>
-                        <Icon name="navicon" size={25} color="white"/>
+                        <Icon name="navicon" size={25} color="#DA344D"/>
                     </TouchableOpacity>
                     <Text style={styles.title}> Flashcard </Text>
                 </View>
@@ -236,6 +237,10 @@ export default class MenuWrapper extends Component {
                                 key={index}
                                 style={[styles.animatedView, {transform: transform}]}>
                                 <CardViewer/>
+                                {active &&
+                                  <TouchableOpacity style={styles.touchy} onPress={this._tapPage}>
+                                  <Text>a</Text>
+                                  </TouchableOpacity> }
                             </Animated.View>
                         )
                     })}
@@ -250,7 +255,7 @@ var styles = StyleSheet.create({
     app: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#DA344D'
+        backgroundColor: 'white'
     },
     header: {
         position: 'relative',
@@ -259,7 +264,7 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 20,
         height: 65,
-        backgroundColor: '#DA344D'
+        backgroundColor: 'white'
     },
     menu: {
         position: 'absolute',
@@ -273,7 +278,7 @@ var styles = StyleSheet.create({
     title: {
         textAlign: 'center',
         fontSize: 20,
-        color: 'white'
+        color: '#DA344D'
     },
     inner: {
         flex: 1,
@@ -289,7 +294,7 @@ var styles = StyleSheet.create({
         paddingTop: 15
     },
     navItemText: {
-        color: '#f7f7f7'
+        color: '#DA344D'
     },
     animatedView: {
         position: 'absolute',
@@ -297,9 +302,17 @@ var styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
+        backgroundColor: '#DA344D',
         shadowColor: 'black',
         shadowOpacity: 0.05,
         shadowRadius: 10,
         shadowOffset: { width: -5, height: 5}
+    },
+    touchy: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
     }
 });

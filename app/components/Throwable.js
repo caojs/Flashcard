@@ -122,7 +122,7 @@ export default class Throwable extends Component {
                     }
                 });
         }
-    } 
+    }
 
     _getStyle () {
         var { pan: {x, y} } = this.state;
@@ -142,7 +142,7 @@ export default class Throwable extends Component {
             {transform: [{translateX}, {translateY}, {rotate}]}
         ];
     }
-};
+}
 
 Throwable.propTypes = {
     threshold: PropTypes.number,
